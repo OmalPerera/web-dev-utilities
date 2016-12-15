@@ -4,6 +4,16 @@ var app = express();
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
+var server = http.createServer(devUtilServerApp);
+
+process.on('uncaughtException', function (error) {
+  if (error !== undefined) {
+    console.log('undefined error');
+  }else {
+    console.log(JSON.stringify(error));
+  }
+});
+
 // configuration
 
 // setting up the port
@@ -33,7 +43,7 @@ require('./app/routes')(app); // configure our routes
 app.listen(port);
 
 // shoutout to the user
-console.log('Magic happens on port ' + port);
+console.log('Server Started on port ' + port);
 
 // expose app
 exports = module.exports = app;
