@@ -1,0 +1,19 @@
+{
+  "name": "web-dev-utilities",
+  "version": "1.0.0",
+  "description": "web utlity tools for make easy day today tasks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OmalPerera/web-dev-utilities.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OmalPerera/web-dev-utilities/issues"
+  },
+  "homepage": "https://github.com/OmalPerera/web-dev-utilities#readme"
+}
