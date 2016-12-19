@@ -35,6 +35,8 @@ devUtilServerApp.use(bodyParser.urlencoded({ extended: true }));
 devUtilServerApp.use(methodOverride('X-HTTP-Method-Override'));
 
 // set the static files location /public/img will be /img for users
+//devUtilServerApp.use(express.static(__dirname + '/public'));
+devUtilServerApp.set('view options', { layout: false });
 devUtilServerApp.use(express.static(__dirname + '/public'));
 
 // routes
