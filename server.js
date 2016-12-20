@@ -1,9 +1,15 @@
-// modules
-var http = require('http');
-var express = require('express');
+//load the DI & Container Registry
+var CoolBeans = require('CoolBeans');
+global.DIRegistry = new CoolBeans('./app/utils/diregistry.util.json');
+
+//load the dependencies
+var http = global.DIRegistry.get('http');
+var express = global.DIRegistry.get('express');
+var methodOverride = global.DIRegistry.get('methodOverride');
+var bodyParser = global.DIRegistry.get('bodyParser');
+
 var devUtilServerApp = express();
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+
 var appConfigs = require('./app/configs.app.js');
 
 var server = http.createServer(devUtilServerApp);

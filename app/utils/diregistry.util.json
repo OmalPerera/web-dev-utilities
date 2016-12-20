@@ -1,0 +1,6 @@
+{
+  "express": {"module":"express"},
+  "http": {"module":"http"},
+  "methodOverride": {"module":"method-override"},
+  "bodyParser": {"module":"body-parser"}
+}
