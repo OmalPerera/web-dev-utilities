@@ -2,5 +2,6 @@
   "express": {"module":"express"},
   "http": {"module":"http"},
   "methodOverride": {"module":"method-override"},
-  "bodyParser": {"module":"body-parser"}
+  "bodyParser": {"module":"body-parser"},
+  "Conversions": {"module":"./app/conversions/jsonReaderProcess.conversions.js"}
 }
