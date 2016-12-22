@@ -1,7 +1,14 @@
 {
-  "express": {"module":"express"},
-  "http": {"module":"http"},
-  "methodOverride": {"module":"method-override"},
-  "bodyParser": {"module":"body-parser"},
-  "Conversions": {"module":"./app/conversions/jsonReaderProcess.conversions.js"}
+  "express": {"module": "express"},
+  "http": {"module": "http"},
+  "methodOverride": {"module": "method-override"},
+  "bodyParser": {"module": "body-parser"},
+  "Conversions": {"module": "./app/conversions/jsonReaderProcess.conversions.js"},
+  "jsonReader" : {
+    "module": "./app/endpoints/jsonreader.route",
+    "constructorArgs" : [
+      {"bean": "express"},
+      {"bean": "devUtilServerApp"}
+    ]
+  }
 }

@@ -10,12 +10,13 @@
   var express = global.DIRegistry.get('express');
   var methodOverride = global.DIRegistry.get('methodOverride');
   var bodyParser = global.DIRegistry.get('bodyParser');
+  var jsonReader = global.DIRegistry.get('jsonReader');
 
   var devUtilServerApp = express();
   var server = http.createServer(devUtilServerApp);
 
   var appConfigs = require('./app/configs.app.js');
-
+  /*
   process.on('uncaughtException', function (error) {
     if (error !== undefined) {
       console.log('undefined error : ' + error);
@@ -23,6 +24,7 @@
       console.log(JSON.stringify(error));
     }
   });
+  */
 
   // setting up the port
   var port = appConfigs.serverPort;
@@ -58,7 +60,14 @@
   });
 
   // routes
-  require('./app/routes')(devUtilServerApp); // configure our routes
+  require('./app/routes/publicRoutes.routes')(devUtilServerApp); // configure our routes
+
+  // API routing
+  devUtilServerApp.use('/api', jsonReader);
+
+  //endpoints
+  //var jsonReader = require('./app/endpoints/jsonreader.route')(express, devUtilServerApp);
+  //devUtilServerApp.use('/jsonreader/readprocess', jsonReader.route);
 
   // start app
   devUtilServerApp.listen(port);
@@ -69,12 +78,4 @@
   // expose app
   exports = module.exports = devUtilServerApp;
 
-  devUtilServerApp.get('/test', function (req, res) {
-    devUtilServerApp.emit('testEvent');
-    console.log('---------------- got it -----------------');
-    res.status(200);
-    res.write('<html><body><h1>hey</h1></body></html>');
-    res.end();
-    return res;
-  });
 }());
