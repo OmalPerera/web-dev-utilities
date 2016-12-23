@@ -10,7 +10,7 @@
   var express = global.DIRegistry.get('express');
   var methodOverride = global.DIRegistry.get('methodOverride');
   var bodyParser = global.DIRegistry.get('bodyParser');
-  var jsonReader = global.DIRegistry.get('jsonReader');
+  var jsonReaderEndpoint = global.DIRegistry.get('jsonReaderEndpoint');
 
   var devUtilServerApp = express();
   var server = http.createServer(devUtilServerApp);
@@ -29,22 +29,9 @@
   // setting up the port
   var port = appConfigs.serverPort;
 
-  /**bodyParser.json(options)
-    * Parses the text as JSON and exposes the resulting object on req.body.
-  */
   devUtilServerApp.use(bodyParser.json());
-
-  // parse application/vnd.api+json as json
   devUtilServerApp.use(bodyParser.json({ type: 'application/vnd.api+json' }));
-
-  // parse application/x-www-form-urlencoded
-  /** bodyParser.urlencoded(options)
-    * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
-    * and exposes the resulting object (containing the keys and values) on req.body
-  */
   devUtilServerApp.use(bodyParser.urlencoded({ extended: true }));
-
-  // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
   devUtilServerApp.use(methodOverride('X-HTTP-Method-Override'));
 
   // set the static files location /public/img will be /img for users
@@ -61,13 +48,7 @@
 
   // routes
   require('./app/routes/publicRoutes.routes')(devUtilServerApp); // configure our routes
-
-  // API routing
-  devUtilServerApp.use('/api', jsonReader);
-
-  //endpoints
-  //var jsonReader = require('./app/endpoints/jsonreader.route')(express, devUtilServerApp);
-  //devUtilServerApp.use('/jsonreader/readprocess', jsonReader.route);
+  devUtilServerApp.use('/jsonreader', jsonReaderEndpoint);
 
   // start app
   devUtilServerApp.listen(port);
