@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,9 +11,6 @@
 
     <title>Web dev's Tools</title>
 
-		<style type="text/css" media="screen">
-
-		</style>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<!-- developer's css -->
@@ -25,7 +22,7 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -38,7 +35,7 @@
 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
+      <div class="container" style="width:100%">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -70,46 +67,52 @@
       </div>
     </nav>
 
-    <div class="container theme-showcase" role="main">
+    <div class="container theme-showcase" role="main" style="width:100%">
 
       <div class="page-header">
-        <h1>Tables</h1>
+        <h1>editor</h1>
+          <button type="button" class="btn btn-default" aria-label="Left Align">
+            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+          </button>
       </div>
       <div class="row">
 
 <!-- ****************************** Input editor ************************** -->
-        <div class="col-md-6" style="min-height:400px">
-					<div id="jsonReaderInput">function jsonReaderInput(items) {
+        <div class="col-md-6">
+          <div class="jsonReaderEditorOuterCommon">
+            <!-- menu bar of the input editor-->
+            <div class="editorMenuBar">
+              hello
+            </div>
+					  <div id="jsonReaderInput">
+function jsonReaderInput(items) {
 	var x = "All this is syntax highlighted";
 	return x;
 }
-				</div>
+            </div>
 
-					<script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-					<!--script>
-							var editor = ace.edit("jsonReaderInput");
-							editor.setTheme("ace/theme/monokai");
-							editor.getSession().setMode("ace/mode/javascript");
-					</script-->
-					<!-- developer's Js -->
-					<script src="app/js/aceConfig.js"></script>
+					     <script src="libs/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+            <!-- creating a variable to get interact with the ediror -->
+					     <script src="app/js/aceProcess.js"></script>
+          </div>
         </div>
 <!-- ****************************** Output editor ************************** -->
-        <div class="col-md-6" style="min-height:400px">
-						<div id="jsonReaderOutput">function jsonReaderOutput(items) {
+        <div class="col-md-6">
+          <div class="jsonReaderEditorOuterCommon">
+            <!-- menu bar of the output editor-->
+            <div class="editorMenuBar">
+              hello2
+            </div>
+						<div id="jsonReaderOutput">
+function jsonReaderOutput(items) {
 		var x = "All this is syntax highlighted";
 		return x;
 }
-					</div>
-
-						<script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-						<!--script>
-						    //var editor = ace.edit("jsonReaderOutput");
-						    //editor.setTheme("ace/theme/monokai");
-						    //editor.getSession().setMode("ace/mode/javascript");
-						</script-->
-						<!-- developer's Js -->
-						<script src="app/js/aceConfig.js"></script>
+					  </div>
+						      <script src="libs/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+                <!-- creating a variable to get interact with the ediror -->
+						      <script src="app/js/aceProcess.js"></script>
+          </div>
         </div>
       </div>
 

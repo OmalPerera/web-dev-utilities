@@ -1,52 +1,62 @@
-// modules
-var http = require('http');
-var express = require('express');
-var devUtilServerApp = express();
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-var appConfigs = require('./app/configs.app.js');
+(function () {
+  'use strict';
 
-var server = http.createServer(devUtilServerApp);
+  //load the DI & Container Registry
+  var CoolBeans = require('CoolBeans');
+  global.DIRegistry = new CoolBeans('./app/utils/diregistry.util.json');
 
-process.on('uncaughtException', function (error) {
-  if (error !== undefined) {
-    console.log('undefined error : ' + error);
-  }else {
-    console.log(JSON.stringify(error));
-  }
-});
+  //load the dependencies
+  var http = global.DIRegistry.get('http');
+  var express = global.DIRegistry.get('express');
+  var methodOverride = global.DIRegistry.get('methodOverride');
+  var bodyParser = global.DIRegistry.get('bodyParser');
+  var jsonReaderEndpoint = global.DIRegistry.get('jsonReaderEndpoint');
 
-// configuration
+  var devUtilServerApp = express();
+  var server = http.createServer(devUtilServerApp);
 
-// setting up the port
-var port = appConfigs.serverPort;
+  var appConfigs = require('./app/configs.app.js');
+  /*
+  process.on('uncaughtException', function (error) {
+    if (error !== undefined) {
+      console.log('undefined error : ' + error);
+    }else {
+      console.log(JSON.stringify(error));
+    }
+  });
+  */
 
-// get all data/stuff of the body (POST) parameters
-// parse application/json
-devUtilServerApp.use(bodyParser.json());
+  // setting up the port
+  var port = appConfigs.serverPort;
 
-// parse application/vnd.api+json as json
-devUtilServerApp.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+  devUtilServerApp.use(bodyParser.json());
+  devUtilServerApp.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+  devUtilServerApp.use(bodyParser.urlencoded({ extended: true }));
+  devUtilServerApp.use(methodOverride('X-HTTP-Method-Override'));
 
-// parse application/x-www-form-urlencoded
-devUtilServerApp.use(bodyParser.urlencoded({ extended: true }));
+  // set the static files location /public/img will be /img for users
+  //devUtilServerApp.use(express.static(__dirname + '/public'));
+  devUtilServerApp.set('view options', { layout: false });
+  devUtilServerApp.use(express.static(__dirname + '/public'));
 
-// override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
-devUtilServerApp.use(methodOverride('X-HTTP-Method-Override'));
+  devUtilServerApp.all('*', function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Header', 'Content-Type');
+    res.header('Access-Control-Allow-Methods', 'GET,POST');
+    next();
+  });
 
-// set the static files location /public/img will be /img for users
-//devUtilServerApp.use(express.static(__dirname + '/public'));
-devUtilServerApp.set('view options', { layout: false });
-devUtilServerApp.use(express.static(__dirname + '/public'));
+  // routes
+  require('./app/routes/publicRoutes.routes')(devUtilServerApp); // configure our routes
+  devUtilServerApp.use('/jsonreader', jsonReaderEndpoint);
 
-// routes
-require('./app/routes')(devUtilServerApp); // configure our routes
+  // start app
+  devUtilServerApp.listen(port);
 
-// start app
-devUtilServerApp.listen(port);
+  // shoutout to the user
+  console.log('Server Started on port ' + port);
 
-// shoutout to the user
-console.log('Server Started on port ' + port);
+  // expose app
+  exports = module.exports = devUtilServerApp;
 
-// expose app
-exports = module.exports = devUtilServerApp;
+}());
