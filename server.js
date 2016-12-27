@@ -29,8 +29,8 @@
   // setting up the port
   var port = appConfigs.serverPort;
 
+  // configure app to use bodyParser(). This will help to get data from POST
   devUtilServerApp.use(bodyParser.json());
-  devUtilServerApp.use(bodyParser.json({ type: 'application/vnd.api+json' }));
   devUtilServerApp.use(bodyParser.urlencoded({ extended: true }));
   devUtilServerApp.use(methodOverride('X-HTTP-Method-Override'));
 
@@ -48,7 +48,9 @@
 
   // routes
   require('./app/routes/publicRoutes.routes')(devUtilServerApp); // configure our routes
-  devUtilServerApp.use('/jsonreader', jsonReaderEndpoint);
+
+  //Registering the Routes & all the routes will be prefixed by /api
+  devUtilServerApp.use('/api', jsonReaderEndpoint);
 
   // start app
   devUtilServerApp.listen(port);

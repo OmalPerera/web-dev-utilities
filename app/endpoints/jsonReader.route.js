@@ -17,7 +17,7 @@
 
   // define the about route
   router.post('/jsonreadingprocess', function (req, res) {
-      res.json('About json reader 123');
+      res.send('About json reader 123');
     });
 
   module.exports = router;

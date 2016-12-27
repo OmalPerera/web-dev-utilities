@@ -4,5 +4,7 @@
   "methodOverride": {"module": "method-override"},
   "bodyParser": {"module": "body-parser"},
   "Conversions": {"module": "./app/conversions/jsonReaderProcess.conversions.js"},
-  "jsonReaderEndpoint" : {"module": "./app/endpoints/jsonreader.route"}
+  "jsonReaderEndpoint": {"module": "./app/endpoints/jsonreader.route"},
+  "mongoose": {"module": "mongoose"},
+  "appConfigs": {"module": "./app/configs.app.js"}
 }
