@@ -16,8 +16,9 @@
     });
 
   // define the about route
-  router.post('/jsonreadingprocess', function (req, res) {
-      return res.json('hellooo it is working');
+  router.get('/jsonreadingprocess', function (req, res) {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify({ id: 1, content: 'msg' }, null, 3));
     });
 
   module.exports = router;

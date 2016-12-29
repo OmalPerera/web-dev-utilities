@@ -1,15 +1,15 @@
 <!doctype html>
-<html ng-app="demo">
+<html ng-app="webDevUtils">
 	<head>
 		<title>Hello AngularJS</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-    	<script src="app/controllers/hello.js"></script>
+		  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+    	<script src="app/controllers/JsonReaderController.js"></script>
 	</head>
 
 	<body>
-		<div ng-controller="Hello">
-			<p>The ID is {{greeting.id}}</p>
-			<p>The content is {{greeting.content}}</p>
+		<div ng-controller="JsonReaderController">
+			<p>The ID is {{jsonReaderResponse.id}}</p>
+			<p>The content is {{jsonReaderResponse.content}}</p>
 		</div>
 	</body>
 </html>
