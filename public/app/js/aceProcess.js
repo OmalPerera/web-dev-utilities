@@ -7,10 +7,11 @@ jsonReaderOutput.setTheme('ace/theme/monokai');
 jsonReaderOutput.getSession().setMode('ace/mode/javascript');
 
 jsonReaderInput.getSession().on('change', function (e) {
-  post('/jsonreader/jsonreadingprocess', { name: 'Omal Perera' });
+  post('/api/jsonreadingprocess', { name: 'Omal Perera' });
   jsonReaderOutput.setValue('the new text here');
 });
 
+// post request sender
 function post(path, params) {
   method = 'post'; // Set method to post by default if not specified.
 

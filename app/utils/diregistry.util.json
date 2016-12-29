@@ -6,5 +6,12 @@
   "Conversions": {"module": "./app/conversions/jsonReaderProcess.conversions.js"},
   "jsonReaderEndpoint": {"module": "./app/endpoints/jsonreader.route"},
   "mongoose": {"module": "mongoose"},
-  "appConfigs": {"module": "./app/configs.app.js"}
+  "appConfigs": {"module": "./app/configs/configs.app.js"},
+  "winston": {"module": "winston"},
+  "logger": {
+    "module": "./app/utils/logger.utils",
+    "constructorArgs": [
+      {"bean": "winston"}
+    ]
+  }
 }
